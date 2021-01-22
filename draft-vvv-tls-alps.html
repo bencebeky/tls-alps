@@ -14,10 +14,28 @@ Any application-layer protocol operating over TLS can use this mechanism to
 indicate its settings to the peer in parallel with the TLS handshake
 completion. 
     " name="description">
-<meta content="xml2rfc 2.43.0" name="generator">
+<meta content="xml2rfc 3.5.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-vvv-tls-alps" name="ietf.draft">
-<link href="draft-vvv-tls-alps.xml" type="application/rfc+xml" rel="alternate">
+<!-- Generator version information:
+  xml2rfc 3.5.0
+    Python 3.8.5
+    appdirs 1.4.4
+    ConfigArgParse 1.2.3
+    google-i18n-address 2.4.0
+    html5lib 1.1
+    intervaltree 3.0.2
+    Jinja2 2.11.2
+    kitchen 1.2.6
+    lxml 4.5.0
+    pycountry 19.8.18
+    pyflakes 2.1.1
+    PyYAML 5.3.1
+    requests 2.22.0
+    setuptools 45.2.0
+    six 1.14.0
+-->
+<link href="draft-vvv-tls-alps.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@import url('https://martinthomson.github.io/i-d-template/fonts.css');
 
@@ -60,11 +78,11 @@ body {
 }
 h1, h2, h3 {
   font-size: 22px;
-  line-height: 26px;
+  line-height: 27px;
 }
 h4, h5, h6 {
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 /* general structure */
@@ -79,9 +97,6 @@ p {
   padding: 0;
   margin: 0.5em 0;
   text-align: left;
-}
-div, span {
-  position: relative;
 }
 div {
   margin: 0;
@@ -140,7 +155,7 @@ svg {
 /* lists */
 ol, ul {
   padding: 0;
-  margin: 0 0 1em 2em;
+  margin: 0 0 0.5em 2em;
 }
 ol ol, ul ul, ol ul, ul ol {
   margin-left: 1em;
@@ -223,6 +238,7 @@ img {
 }
 figure {
   margin: 0.5em 0;
+  padding: 0;
 }
 figure blockquote {
   margin: 0.8em 0.4em 0.4em;
@@ -248,10 +264,6 @@ figcaption, caption {
     vertical-align: text-bottom;
     padding-bottom: 8px;
   }
-  table {
-    display: inline-block;
-    overflow-x: auto;
-  }
 }
 
 /* aside, blockquote */
@@ -274,9 +286,19 @@ cite {
 
 /* tables */
 table {
-  width: 100%;
+  max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
 }
 thead, tbody {
   border: 1px solid var(--line-color);
@@ -287,8 +309,7 @@ th, td {
   padding: 5px 10px;
 }
 th {
-  text-align: left;
-  background-color: #eee;
+  background-color: var(--line-color);
 }
 tr:nth-child(2n) > td {
   background-color: var(--background-color);
@@ -304,28 +325,32 @@ thead+tbody > tr:nth-child(2n+1) > td {
 }
 table caption {
   margin: 0;
-  padding: 3px 1em;
+  padding: 3px 0 3px 1em;
 }
 table p {
-  /* XXX to avoid bottom margin on table row signifiers. If paragraphs should
-     be allowed within tables more generally, it would be far better to select on a class. */
   margin: 0;
 }
 
 /* pilcrow */
 a.pilcrow {
   margin-left: 3px;
-  visibility: hidden;
+  opacity: 0.2;
   user-select: none;
 }
 a.pilcrow[href] { color: #ddd; }
 a.pilcrow[href]:hover { text-decoration: none; }
 @media screen {
   :hover > a.pilcrow {
-    visibility: visible;
+    opacity: 1;
   }
-  a.pilcrow:hover {
+  a.pilcrow[href]:hover {
+    color: #bbb;
     background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
   }
 }
 
@@ -766,21 +791,6 @@ address div.right {
   text-align: right;
 }
 
-/* Provide table alignment support.  We can't use the alignX classes above
-   since they do unwanted things with caption and other styling. */
-table.right {
- margin-left: auto;
- margin-right: 0;
-}
-table.center {
- margin-left: auto;
- margin-right: auto;
-}
-table.left {
- margin-left: 0;
- margin-right: auto;
-}
-
 /* Give the table caption label the same styling as the figcaption */
 
 @media print {
@@ -809,18 +819,18 @@ table.left {
   font-size: 0.9em;
 }
 </style>
-<link href="rfc-local.css" type="text/css" rel="stylesheet">
+
 </head>
 <body>
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">TLS ALPS</td>
-<td class="right">September 2020</td>
+<td class="right">January 2021</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Benjamin &amp; Vasiliev</td>
-<td class="center">Expires 25 March 2021</td>
+<td class="center">Expires 26 July 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -833,12 +843,12 @@ table.left {
 <dd class="internet-draft">draft-vvv-tls-alps</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-09-21" class="published">21 September 2020</time>
+<time datetime="2021-01-22" class="published">22 January 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2021-03-25">25 March 2021</time></dd>
+<dd class="expires"><time datetime="2021-07-26">26 July 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -891,7 +901,7 @@ completion.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 March 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 July 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -900,7 +910,7 @@ completion.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2020 IETF Trust and the persons identified as the
+            Copyright (c) 2021 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -919,51 +929,51 @@ completion.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
         <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
 <a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
         </h2>
-<nav class="toc"><ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-toc.1-1.1">
+<nav class="toc"><ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a><a href="#section-toc.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.2">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-conventions-and-definitions" class="xref">Conventions and Definitions</a><a href="#section-toc.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.3">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="xref">3</a>.  <a href="#name-semantics" class="xref">Semantics</a><a href="#section-toc.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.4">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-wire-protocol" class="xref">Wire Protocol</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-toc.1-1.4.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-client-encrypted-extensions" class="xref">Client Encrypted Extensions</a><a href="#section-toc.1-1.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.4.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.4.2.2">
                 <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="xref">4.2</a>.  <a href="#name-0-rtt-handshakes" class="xref">0-RTT Handshakes</a><a href="#section-toc.1-1.4.2.2.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+            </ul>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.5">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-security-considerations" class="xref">Security Considerations</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.6">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a><a href="#section-toc.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.7">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="xref">7</a>.  <a href="#name-references" class="xref">References</a><a href="#section-toc.1-1.7.1" class="pilcrow">¶</a></p>
-<ul class="toc ulEmpty">
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.1">
+<ul class="ulEmpty toc compact">
+<li class="ulEmpty toc compact" id="section-toc.1-1.7.2.1">
                 <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="xref">7.1</a>.  <a href="#name-normative-references" class="xref">Normative References</a><a href="#section-toc.1-1.7.2.1.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.7.2.2">
+              <li class="ulEmpty toc compact" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="xref">7.2</a>.  <a href="#name-informative-references" class="xref">Informative References</a><a href="#section-toc.1-1.7.2.2.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+            </ul>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.8">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-appendix.a" class="xref"></a><a href="#name-acknowledgments" class="xref">Acknowledgments</a><a href="#section-toc.1-1.8.1" class="pilcrow">¶</a></p>
 </li>
-<li class="toc ulEmpty" id="section-toc.1-1.9">
+          <li class="ulEmpty toc compact" id="section-toc.1-1.9">
             <p id="section-toc.1-1.9.1"><a href="#section-appendix.b" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a><a href="#section-toc.1-1.9.1" class="pilcrow">¶</a></p>
 </li>
-</ul>
+        </ul>
 </nav>
 </section>
 </div>
@@ -980,21 +990,21 @@ each endpoint.  This is usually achieved by waiting for TLS handshake
 within the application protocol itself.  This approach, despite its apparent
 simplicity at first, has multiple drawbacks:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-1-2">
-        <li id="section-1-2.1">While the server is technically capable of sending configuration to the peer
+<li id="section-1-2.1">While the server is technically capable of sending configuration to the peer
 as soon as it sends its Finished message, most TLS implementations do not
 allow any application data to be sent until the Finished message is received
 from the client.  This adds an extra round-trip to the time of when the
 server settings are available to the client.<a href="#section-1-2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-1-2.2">In QUIC, any settings delivered within the application layer can arrive
+        <li id="section-1-2.2">In QUIC, any settings delivered within the application layer can arrive
 after other application data; thus, the application has to operate under the
 assumption that peer's settings are not always available.<a href="#section-1-2.2" class="pilcrow">¶</a>
 </li>
-<li id="section-1-2.3">If the application needs to be aware of the server settings in order to send
+        <li id="section-1-2.3">If the application needs to be aware of the server settings in order to send
 0-RTT data, the application has to manually integrate with the TLS stack to
 associate the settings with TLS session tickets.<a href="#section-1-2.3" class="pilcrow">¶</a>
 </li>
-</ol>
+      </ol>
 <p id="section-1-3">This document introduces a new TLS extension, <code>application_settings</code>, that
 allows applications to exchange settings within the TLS handshake.  Through
 doing that, the settings can be made available to the application as soon as the
@@ -1062,14 +1072,14 @@ with respect to a selected ALPN.<a href="#section-3-5" class="pilcrow">¶</a></p
 not provide any confidentiality protections for the handshake data.  The
 exchange is performed in three steps:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4-2">
-        <li id="section-4-2.1">The client sends an extension in ClientHello that enumerates all ALPN values
+<li id="section-4-2.1">The client sends an extension in ClientHello that enumerates all ALPN values
 for which ALPS is supported.<a href="#section-4-2.1" class="pilcrow">¶</a>
 </li>
-<li id="section-4-2.2">The server sends an encrypted extension containing the server settings.<a href="#section-4-2.2" class="pilcrow">¶</a>
+        <li id="section-4-2.2">The server sends an encrypted extension containing the server settings.<a href="#section-4-2.2" class="pilcrow">¶</a>
 </li>
-<li id="section-4-2.3">The client sends an encrypted extension containing the client settings.<a href="#section-4-2.3" class="pilcrow">¶</a>
+        <li id="section-4-2.3">The client sends an encrypted extension containing the client settings.<a href="#section-4-2.3" class="pilcrow">¶</a>
 </li>
-</ol>
+      </ol>
 <span id="name-alps-exchange-in-a-full-tls"></span><div id="alps-full">
 <figure id="figure-1">
         <div class="artwork art-text alignLeft" id="section-4-3.1">
@@ -1122,18 +1132,23 @@ defined in <span>[<a href="#RFC7301" class="xref">RFC7301</a>]</span>) for which
 for the situations when the client offers multiple ALPN values but only supports
 ALPS in some of them.<a href="#section-4-6" class="pilcrow">¶</a></p>
 <p id="section-4-7">If the server chooses an ALPN value for which the client has offered ALPS
-support, the server MAY negotiate ALPS by sending an <code>application_settings</code>
-extension in its EncryptedExtensions message.  The value of the <code>extension_data</code>
-field in that case SHALL be an opaque blob containing the server settings as
-specified by the application protocol.<a href="#section-4-7" class="pilcrow">¶</a></p>
+support, the server MAY additionally negotiate ALPS in this connection and
+determine a server settings value. This is an opaque blob as specified by the
+ALPN protocol. If not accepting early data (see <a href="#early-data" class="xref">Section 4.2</a>), the server then
+sends an <code>application_settings</code> extension in its EncryptedExtensions message.
+The value of the <code>extension_data</code> field in that case SHALL the server settings
+value.<a href="#section-4-7" class="pilcrow">¶</a></p>
 <p id="section-4-8">If the client receives an EncryptedExtensions message containing an
-<code>application_settings</code> extension from the server, it MUST send an
-EncryptedExtensions message (see <a href="#encrypted-extensions" class="xref">Section 4.1</a>) containing an
-<code>application_extensions</code> extension. The value of the <code>extension_data</code> in this
-extension SHALL be an opaque blob containing the client settings as specified by
-the application protocol. A server which negotiates ALPS MUST abort the
-handshake with a <code>missing_extension</code> alert if the client's EncryptedExtensions
-is missing this extension.<a href="#section-4-8" class="pilcrow">¶</a></p>
+<code>application_settings</code> extension from the server, it first checks that ALPN was
+negotiated and that the selected ALPN protocol was one of the ones advertised in
+ApplicationSettingsSupport. If not, it MUST abort the connection with an
+"illegal_parameter" alert. Otherwise, it MUST send an EncryptedExtensions
+message (see <a href="#encrypted-extensions" class="xref">Section 4.1</a>) containing an <code>application_extensions</code>
+extension. The value of the <code>extension_data</code> in this extension SHALL be an
+opaque blob containing the client settings as specified by the application
+protocol. A server which negotiates ALPS MUST abort the handshake with a
+<code>missing_extension</code> alert if the client's EncryptedExtensions is missing this
+extension.<a href="#section-4-8" class="pilcrow">¶</a></p>
 <div id="encrypted-extensions">
 <section id="section-4.1">
         <h3 id="name-client-encrypted-extensions">
@@ -1170,35 +1185,50 @@ breaks this. Extension order is unpredictable. We should resolve this conflict,
 either by dropping that feature or removing flexibility here.]]<a href="#section-4.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="rtt-handshakes">
+<div id="early-data">
 <section id="section-4.2">
         <h3 id="name-0-rtt-handshakes">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-0-rtt-handshakes" class="section-name selfRef">0-RTT Handshakes</a>
         </h3>
 <p id="section-4.2-1">ALPS ensures settings are available before reading and writing application data,
 so handshakes which negotiate early data instead use application settings from
-the PSK. To use early data with a PSK, the TLS implementation MUST associate both
-client and server application settings, if any, with the PSK. For a resumption
-PSK, these values are determined from the original connection. For an external
-PSK, this values should be configured with it. Existing PSKs are considered to
-not have application settings.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">If the server accepts early data, the server SHALL NOT send an
+the PSK. To use early data with a PSK, the TLS implementation MUST associate
+both client and server application settings, if any, with the PSK. For a
+resumption PSK, these values are determined from the original connection. For an
+external PSK, this values should be configured with it. Existing PSKs are
+considered to not have application settings.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">When sending a ClientHello, clients MUST NOT offer early data with a PSK that
+has application settings if the PSK's client application settings are different
+from those the client would send for the PSK's ALPN protocol. If the PSK does
+not have application settings, the client MAY offer early data with the PSK
+independent of its ALPS configuration.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-3">When processing a ClientHello, in addition to the checks specified by Section
+4.2.10 of <span>[<a href="#RFC8446" class="xref">RFC8446</a>]</span>, the server MUST verify the following before accepting
+early data:<a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.2-4.1">If the server did not negotiate ALPS for the connection, the PSK does not<a href="#section-4.2-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.2-4.2">have
+application settings.<a href="#section-4.2-4.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.2-4.3">If the server did negotiate ALPS for the connection, the PSK has application
+settings and the PSK's server settings value matches the value selected by the
+server.<a href="#section-4.2-4.3" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.2-5">If either check fails, the server MUST NOT accept early data. It MAY continue to
+negotiate the PSK.<a href="#section-4.2-5" class="pilcrow">¶</a></p>
+<p id="section-4.2-6">If the server accepts early data, the server SHALL NOT send an
 <code>application_settings</code> extension, and thus the client SHALL NOT send a
 <code>application_settings</code> extension in its EncryptedExtensions message. Unless the
 server has sent some other extension which uses client EncryptedExtensions, the
 client SHALL NOT send an EncryptedExtensions message. Instead, the connection
-implicitly uses the PSK's application settings, if any.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
-<p id="section-4.2-3">If the server rejects early data, application settings are negotiated
-independently of the PSK, as if early data were not offered.<a href="#section-4.2-3" class="pilcrow">¶</a></p>
-<p id="section-4.2-4">If the client wishes to send different client settings for the connection,
-it MUST NOT offer 0-RTT.  Conversely, if the server wishes to use send different
-server settings, it MUST reject 0-RTT.  Note that the ALPN itself is similarly
-required to match the one in the original connection, thus the settings
-only need to be remembered or checked for a single application protocol.
-Implementations are RECOMMENDED to first determine the desired application
-protocol and settings independent of early data, and then decline to offer or
-accept early data if the values do not match the PSK. This preserves any ALPN
-and ALPS configuration specified by the calling application.<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+implicitly uses the PSK's application settings, if any.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
+<p id="section-4.2-7">If the server rejects early data, application settings are negotiated
+independently of the PSK, as if early data were not offered.<a href="#section-4.2-7" class="pilcrow">¶</a></p>
+<p id="section-4.2-8">The checks in this section are analogous to the requirement that ALPN is
+preserved across early data. They ensure that early data does not change the
+result of the ALPN or ALPS negotiation.<a href="#section-4.2-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1236,20 +1266,20 @@ this extension may appear is <code>CH, EE, CEE</code>.<a href="#section-6-1" cla
         </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
-<dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7301">[RFC7301]</dt>
-<dd>
-<span class="refAuthor">Friedl, S.</span><span class="refAuthor">, Popov, A.</span><span class="refAuthor">, Langley, A.</span><span class="refAuthor">, and E. Stephan</span>, <span class="refTitle">"Transport Layer Security (TLS) Application-Layer Protocol Negotiation Extension"</span>, <span class="seriesInfo">RFC 7301</span>, <span class="seriesInfo">DOI 10.17487/RFC7301</span>, <time datetime="2014-07">July 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7301">https://www.rfc-editor.org/info/rfc7301</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Friedl, S.</span><span class="refAuthor">, Popov, A.</span><span class="refAuthor">, Langley, A.</span><span class="refAuthor">, and E. Stephan</span>, <span class="refTitle">"Transport Layer Security (TLS) Application-Layer Protocol Negotiation Extension"</span>, <span class="seriesInfo">RFC 7301</span>, <span class="seriesInfo">DOI 10.17487/RFC7301</span>, <time datetime="2014-07" class="refDate">July 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7301">https://www.rfc-editor.org/info/rfc7301</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-<dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8446">[RFC8446]</dt>
-<dd>
-<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8446">https://www.rfc-editor.org/info/rfc8446</a>&gt;</span>. </dd>
+      <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8446">https://www.rfc-editor.org/info/rfc8446</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1259,12 +1289,12 @@ this extension may appear is <code>CH, EE, CEE</code>.<a href="#section-6-1" cla
         </h3>
 <dl class="references">
 <dt id="I-D.ietf-quic-transport">[I-D.ietf-quic-transport]</dt>
-<dd>
-<span class="refAuthor">Iyengar, J.</span><span class="refAuthor"> and M. Thomson</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-transport-30</span>, <time datetime="2020-09-09">9 September 2020</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-ietf-quic-transport-30.txt">http://www.ietf.org/internet-drafts/draft-ietf-quic-transport-30.txt</a>&gt;</span>. </dd>
+        <dd>
+<span class="refAuthor">Iyengar, J.</span><span class="refAuthor"> and M. Thomson</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-quic-transport-34</span>, <time datetime="2021-01-14" class="refDate">14 January 2021</time>, <span>&lt;<a href="http://www.ietf.org/internet-drafts/draft-ietf-quic-transport-34.txt">http://www.ietf.org/internet-drafts/draft-ietf-quic-transport-34.txt</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7540">[RFC7540]</dt>
-<dd>
-<span class="refAuthor">Belshe, M.</span><span class="refAuthor">, Peon, R.</span><span class="refAuthor">, and M. Thomson, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol Version 2 (HTTP/2)"</span>, <span class="seriesInfo">RFC 7540</span>, <span class="seriesInfo">DOI 10.17487/RFC7540</span>, <time datetime="2015-05">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7540">https://www.rfc-editor.org/info/rfc7540</a>&gt;</span>. </dd>
+      <dd>
+<span class="refAuthor">Belshe, M.</span><span class="refAuthor">, Peon, R.</span><span class="refAuthor">, and M. Thomson, Ed.</span>, <span class="refTitle">"Hypertext Transfer Protocol Version 2 (HTTP/2)"</span>, <span class="seriesInfo">RFC 7540</span>, <span class="seriesInfo">DOI 10.17487/RFC7540</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7540">https://www.rfc-editor.org/info/rfc7540</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
